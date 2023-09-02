@@ -15,7 +15,15 @@ public class Main {
         //Util.sequenceInputStreamDemo();
         //Util.sequenceInputStreamDemo1();
 
-        Util.bufferedInputStreamDemo2(basePath + "bigfile.txt");
+        //Util.bufferedInputStreamDemo2(basePath + "bigfile.txt");
 
+        //Util.fileOutputStreamDemo1(basePath + "out1.txt");
+
+        //Util.fileCopy1(basePath + "sample_video_1.mp4", basePath + "myvideo.mp4");
+        //Util.fileCopy1(basePath + "bitcode.txt", basePath + "bitcode_data");
+
+        //Util.byteArrayOutputStreamDemo();
+        //Util.printStreamDemo(basePath + "ps_data.txt");
+        //Util.fileCopy1(basePath + "sample_video_1.mp4", basePath + "myvideo_new.mp4");
     }
 }

@@ -173,4 +173,115 @@ public class Util {
 
     }
 
+    public static void fileOutputStreamDemo1(String filePath) {
+
+        try {
+
+            FileOutputStream fout = new FileOutputStream(filePath, true);
+            fout.write("java is good".getBytes());
+            fout.close();
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public static boolean fileCopy1(String src, String dest) {
+        File fileIn = new File(src);
+        if(!fileIn.exists()) {
+            return false;
+        }
+
+        try {
+            FileInputStream fin = new FileInputStream(src);
+            FileOutputStream fout = new FileOutputStream(dest);
+
+            byte [] data = new byte[1204 * 8];
+            int count;
+            while( (count = fin.read(data)) != -1) {
+                fout.write(data, 0, count);
+            }
+
+            fin.close();
+            fout.close();
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return false;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+
+        return true;
+    }
+
+    public static void byteArrayOutputStreamDemo() {
+        ByteArrayOutputStream bout = new ByteArrayOutputStream();
+        try {
+            bout.write("this is nice class".getBytes());
+            byte [] data = bout.toByteArray();
+            System.out.println(new String(data));
+            bout.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void printStreamDemo(String filePath) {
+        try {
+            int i = 0;
+            PrintStream ps = new PrintStream(new FileOutputStream(filePath));
+            ps.println("I am living in a " + i + "\n");
+            ps.print('A');
+            ps.print('B');
+            ps.print("\n");
+            ps.println(909123);
+            ps.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    //BufferedOutputStream
+    public static boolean fileCopy2(String src, String dest) {
+        File fileIn = new File(src);
+        if(!fileIn.exists()) {
+            return false;
+        }
+
+        try {
+            BufferedInputStream buffIn =
+                    new BufferedInputStream(
+                            new FileInputStream(src)
+                    );
+
+            BufferedOutputStream buffOut = new BufferedOutputStream(
+                    new FileOutputStream(dest)
+            );
+
+            byte [] data = new byte[1204 * 8];
+            int count;
+            while( (count = buffIn.read(data)) != -1) {
+                buffOut.write(data, 0, count);
+            }
+
+            buffIn.close();
+            buffOut.close();
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return false;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+
+        return true;
+    }
+
 }
