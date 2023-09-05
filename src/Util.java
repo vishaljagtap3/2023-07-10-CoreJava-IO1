@@ -1,4 +1,5 @@
 import java.io.*;
+import java.util.Scanner;
 
 public class Util {
 
@@ -143,7 +144,7 @@ public class Util {
 
         try {
             FileInputStream fin = new FileInputStream(filePath);
-            BufferedInputStream bin = new BufferedInputStream(fin, 16*1024);
+            BufferedInputStream bin = new BufferedInputStream(fin, 16 * 1024);
             int val = 0;
 
             System.out.println("Available : " + bin.available());
@@ -191,7 +192,7 @@ public class Util {
 
     public static boolean fileCopy1(String src, String dest) {
         File fileIn = new File(src);
-        if(!fileIn.exists()) {
+        if (!fileIn.exists()) {
             return false;
         }
 
@@ -199,9 +200,9 @@ public class Util {
             FileInputStream fin = new FileInputStream(src);
             FileOutputStream fout = new FileOutputStream(dest);
 
-            byte [] data = new byte[1204 * 8];
+            byte[] data = new byte[1204 * 8];
             int count;
-            while( (count = fin.read(data)) != -1) {
+            while ((count = fin.read(data)) != -1) {
                 fout.write(data, 0, count);
             }
 
@@ -223,7 +224,7 @@ public class Util {
         ByteArrayOutputStream bout = new ByteArrayOutputStream();
         try {
             bout.write("this is nice class".getBytes());
-            byte [] data = bout.toByteArray();
+            byte[] data = bout.toByteArray();
             System.out.println(new String(data));
             bout.close();
 
@@ -250,7 +251,7 @@ public class Util {
     //BufferedOutputStream
     public static boolean fileCopy2(String src, String dest) {
         File fileIn = new File(src);
-        if(!fileIn.exists()) {
+        if (!fileIn.exists()) {
             return false;
         }
 
@@ -264,9 +265,9 @@ public class Util {
                     new FileOutputStream(dest)
             );
 
-            byte [] data = new byte[1204 * 8];
+            byte[] data = new byte[1204 * 8];
             int count;
-            while( (count = buffIn.read(data)) != -1) {
+            while ((count = buffIn.read(data)) != -1) {
                 buffOut.write(data, 0, count);
             }
 
@@ -282,6 +283,100 @@ public class Util {
         }
 
         return true;
+    }
+
+    public static void dataInputOutputStreamDemo() {
+
+        try {
+            DataOutputStream dout =
+                    new DataOutputStream(
+                            new FileOutputStream("/home/vishal/java/new-demos/db_data.txt")
+                    );
+            dout.writeInt(1234);
+            dout.writeFloat(12.12f);
+            dout.writeBoolean(true);
+            dout.writeUTF("bitcode");
+
+            dout.close();
+
+            DataInputStream din = new DataInputStream(
+                    new FileInputStream("/home/vishal/java/new-demos/db_data.txt")
+            );
+
+            System.out.println(din.readInt());
+            System.out.println(din.readFloat());
+            System.out.println(din.readBoolean());
+            System.out.println(din.readUTF());
+
+            din.close();
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public static void scannerDemo() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println(scanner.nextInt());
+        System.out.println(scanner.nextFloat());
+        scanner.nextLine();
+        System.out.println(scanner.nextLine());
+    }
+
+    public static void readWriteObject(Student s) {
+        try {
+            DataOutputStream dout =
+                    new DataOutputStream(
+                            new FileOutputStream("/home/vishal/java/new-demos/student.data")
+                    );
+            dout.writeInt(s.getRoll());
+            dout.writeUTF(s.getName());
+            dout.writeFloat(s.getMarks());
+            dout.writeUTF(s.getHobbies());
+            dout.close();
+
+            DataInputStream din =
+                    new DataInputStream(
+                            new FileInputStream("/home/vishal/java/new-demos/student.data")
+                    );
+
+            Student snew = new Student(din.readInt(), din.readUTF(), din.readFloat(), din.readUTF());
+            System.out.println(snew);
+
+            din.close();
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void objectInputOutputStreamDemo(Student s) {
+        String path = "/home/vishal/java/new-demos/student_objects.data";
+        try {
+            ObjectOutputStream out = new ObjectOutputStream(
+                      new FileOutputStream(path)
+            );
+            out.writeObject(s);
+            out.close();
+
+            ObjectInputStream in = new ObjectInputStream(
+                    new FileInputStream(path)
+            );
+            Student snew = (Student) in.readObject();
+            in.close();
+
+            System.out.println(snew);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
 }

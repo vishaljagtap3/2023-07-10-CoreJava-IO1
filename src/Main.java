@@ -25,5 +25,14 @@ public class Main {
         //Util.byteArrayOutputStreamDemo();
         //Util.printStreamDemo(basePath + "ps_data.txt");
         //Util.fileCopy1(basePath + "sample_video_1.mp4", basePath + "myvideo_new.mp4");
+        //Util.dataInputOutputStreamDemo();
+
+        //Util.scannerDemo();
+
+        Student s1 =
+                new Student(11, "Everyone from java batch", 89, "sleeping, being lazy");
+        //Util.readWriteObject(s1);
+        Util.objectInputOutputStreamDemo(s1);
+
     }
 }
