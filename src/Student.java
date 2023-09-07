@@ -6,6 +6,8 @@ public class Student implements Serializable {
     private float marks;
     private String hobbies;
 
+    public static final long serialVersionUID = 100L;
+
     public Student(int roll, String name, float marks, String hobbies) {
         this.roll = roll;
         this.name = name;

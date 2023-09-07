@@ -29,10 +29,24 @@ public class Main {
 
         //Util.scannerDemo();
 
-        Student s1 =
-                new Student(11, "Everyone from java batch", 89, "sleeping, being lazy");
+        /*Student s1 =
+                new Student(
+                        11,
+                        "Everyone from java batch",
+                        89,
+                        "sleeping, being lazy"
+                );
         //Util.readWriteObject(s1);
-        Util.objectInputOutputStreamDemo(s1);
+        Util.objectInputOutputStreamDemo(s1);*/
+
+        Product product = new Product(
+                1011,
+                "How to become rich without working hard...",
+                120,
+                4.6f
+        );
+
+        Util.objectExternalizationDemo(product);
 
     }
 }

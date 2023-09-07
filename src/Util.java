@@ -358,13 +358,13 @@ public class Util {
     public static void objectInputOutputStreamDemo(Student s) {
         String path = "/home/vishal/java/new-demos/student_objects.data";
         try {
-            ObjectOutputStream out = new ObjectOutputStream(
+            /*ObjectOutputStream out = new ObjectOutputStream(
                       new FileOutputStream(path)
             );
             out.writeObject(s);
-            out.close();
+            out.close();*/
 
-            ObjectInputStream in = new ObjectInputStream(
+           ObjectInputStream in = new ObjectInputStream(
                     new FileInputStream(path)
             );
             Student snew = (Student) in.readObject();
@@ -375,6 +375,28 @@ public class Util {
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void objectExternalizationDemo(Product p) {
+        try {
+            ObjectOutputStream out =
+                    new ObjectOutputStream(
+                            new FileOutputStream("/home/vishal/java/new-demos/products.db")
+                    );
+            out.writeObject(p);
+            out.close();
+
+            ObjectInputStream in = new ObjectInputStream(
+                    new FileInputStream("/home/vishal/java/new-demos/products.db")
+            );
+
+            Product product = (Product) in.readObject();
+            System.out.println(product);
+
+            in.close();
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
